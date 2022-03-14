@@ -1,17 +1,23 @@
 <h1>Hello</h1>
 
+{{#each kotiki}}
+
 <div class="d-flex flex-row bd-highlight mb-3">
-    <div class="card" style="max-width: 400px;"><img src="https://rozetked.me/images/uploads/dwoilp3BVjlE.jpg"
-            class="img-thumbnail" alt="...">
+    <div class="card" style="max-width: 400px;"><img src="{{this.link}}" class="img-thumbnail" alt="...">
     </div>
-    <div class="card" style="max-width: 400px;"><img
-            src="https://n1s1.elle.ru/48/7b/36/487b36300c62c5f0cb905da52aa874b4/728x486_1_30b570c2f6c0da65bb56095068e05768@940x627_0xc0a839a4_18087198581488362059.jpeg"
-            class="img-thumbnail" alt="..."></div>
-</div>
 
-
-<div class="mb-3">
-    <label for="formFile" class="form-label">Default file input example</label>
-    <input class="form-control" type="file" id="formFile">
-    <button type="submit" class="btn btn-primary">Submit</button>
 </div>
+{{/each}}
+
+<form action="/catslist" method="POST">
+    <div class="mb-3">
+        <label for="catsName" class="form-label">Имя котика</label>
+        <input name="name" type="text" class="form-control" id="">
+    </div>
+    <div class="mb-3">
+        <label for="catsLink" class="form-label">Вставте прямую ссылку на фотку с котиком(URL)</label>
+        <input name="link" type="text" class="form-control" id="">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
