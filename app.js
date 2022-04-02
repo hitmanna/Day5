@@ -12,6 +12,8 @@ const saltRounds = 10
 const hbs = require('hbs');
 const { count } = require('console');
 
+app.use(express.static(path.join(__dirname, "public")))
+
 app.use(sessions({
   name: app.get('cookieName'),
   secret: secretKey,
@@ -111,8 +113,10 @@ app.get("/insta", checkAuth, (req, res) => {
 
 app.post('/insta', (req, res) => {
   const dataFromForm = req.body;
+  const currentUser = req.session.id
+  dataFromForm.sidFromUser1 = currentUser
     db.cats.push(dataFromForm);
-  
+  // добавляем новый пост, имя юзера записываем в массив вместе с котиком
   res.redirect('/secret');
 });
 
@@ -138,17 +142,17 @@ app.get("/secret", checkAuth, (req, res) => {
   res.render('secret.hbs', { kotiki: db.cats });
 })
 
-
+/*
 app.post("/secret", checkAuth, (req, res) => {
   const dataFromForm = req.body;
-  const sidFromUser1 = req.session.id
-  if (sidFromUser1 === db.cats.sidFromUser1 ) {
-  db.cats.remove(dataFromForm);
+  const sidFromUser1 = req.session.user
+  if (sidFromUser1 === db.cats.sidFromUser1) {
+  db.cats.pop(dataFromForm);
   }
-  else {alert("Не ваш пост!")}
+  else  res.send(403)
   res.redirect('/secret');
-}) 
-
+}) // попытка сделать кнопку удаления поста через кнопку отправки формы
+*/
 app.listen(3000, () => {
   console.log('server start success');
 });
