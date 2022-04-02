@@ -1,0 +1,29 @@
+<h1> {{#if name}}
+    Привет, {{name}}
+    {{/if}}
+</h1>
+<nav>
+    <ul>
+        <li>
+            <a href="/">Главная</a>
+        </li>
+        {{#if name}}
+        <li>
+            <a href="/auth/signout">Выйти</a>
+        </li>
+        {{else}}
+        <li>
+            <a href="/auth/signup">Регистрация</a>
+        </li>
+        <li>
+            <a href="/auth/signin">Войти</a>
+            {{/if}}
+
+        <li>
+            <a href="/insta">Добавить публикацию</a>
+        </li>
+        <li>
+            <a href="/secret">Смотреть публикации</a>
+        </li>
+    </ul>
+</nav>
